@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Bail Me — Library</title>
+  <link rel="manifest" href="../manifest.webmanifest">
+  <meta name="theme-color" content="#0f172a" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../assets/css/styles.css" />
+</head>
+<body class="bg-slate-50 text-slate-900">
+  <header class="site-header"></header>
+
+  <main class="max-w-3xl mx-auto px-4 py-6">
+    <h1 class="page-title">Library</h1>
+    <div class="flex items-center gap-2 mb-3">
+      <input id="search" type="search" placeholder="Search library…" class="ctrl flex-1" />
+      <span class="muted">Total: <span id="lib-count">0</span></span>
+    </div>
+    <section id="library" class="grid gap-3"></section>
+
+    <template id="card-template">
+      <article class="card">
+        <div class="flex items-start gap-3">
+          <div class="flex-1">
+            <p class="card-text"></p>
+            <div class="tags">
+              <span class="tag category"></span>
+              <span class="tag intent"></span>
+              <span class="tag tone"></span>
+            </div>
+          </div>
+          <div class="card-actions">
+            <button class="btn-copy">Copy</button>
+            <button class="btn-share">Share</button>
+            <button class="btn-fav">☆ Save</button>
+          </div>
+        </div>
+      </article>
+    </template>
+  </main>
+
+  <footer class="site-footer"></footer>
+  <script>window.__PAGE__ = 'library';</script>
+  <script type="module" src="../assets/js/excuses.js"></script>
+  <script type="module" src="../assets/js/ui.js"></script>
+  <script type="module" src="../assets/js/storage.js"></script>
+  <script type="module" src="../assets/js/page.js"></script>
+</body>
+</html>

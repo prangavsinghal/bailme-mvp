@@ -1,0 +1,22 @@
+/* Minimal CSS atop Tailwind */
+.site-header { position: sticky; top: 0; z-index: 10; background: rgba(255,255,255,.8); backdrop-filter: blur(8px); border-bottom: 1px solid rgb(226 232 240); }
+.site-footer { border-top: 1px solid rgb(226 232 240); }
+.navbar { max-width: 48rem; margin: 0 auto; padding: .75rem 1rem; display:flex; align-items:center; justify-content:space-between; }
+.brand { font-weight: 800; font-size: 1.1rem; }
+.navlinks a { padding: .25rem .75rem; border-radius: .5rem; font-size: .875rem; font-weight: 500; background: rgb(241 245 249); margin-left: .25rem; }
+.navlinks a.active { background: rgb(15 23 42); color: white; }
+.home-card { display:block; padding: 1rem; border-radius: 1rem; border:1px solid rgb(226 232 240); background: white; }
+.page-title { font-size: 1.5rem; font-weight: 800; margin-bottom: 1rem; }
+.lbl { display:block; font-size: .75rem; color: rgb(71 85 105); margin-bottom: .25rem; }
+.ctrl { width: 100%; border-radius: .75rem; border:1px solid rgb(203 213 225); padding:.5rem .75rem; }
+.btn-primary { border-radius: .75rem; background: rgb(15 23 42); color:white; padding:.5rem; font-weight:700; }
+.card { border-radius: 1rem; border:1px solid rgb(226 232 240); background: white; padding: 1rem; box-shadow: 0 1px 4px rgba(0,0,0,.03); }
+.card-text { font-size: .95rem; line-height: 1.4; }
+.card-actions { display:flex; flex-direction:column; gap:.5rem; }
+.card-actions button { font-size: .75rem; padding:.25rem .75rem; border-radius:.5rem; }
+.btn-copy { background: rgb(15 23 42); color:white; }
+.btn-share { background: rgb(241 245 249); }
+.btn-fav { background: rgb(254 243 199); border:1px solid rgb(253 230 138); }
+.tag { padding:.125rem .5rem; border-radius: 9999px; background: rgb(241 245 249); color: rgb(100 116 139); font-size: .75rem; }
+.tags { margin-top: .5rem; display:flex; flex-wrap:wrap; gap:.5rem; }
+.muted { color: rgb(71 85 105); font-size: .9rem; }

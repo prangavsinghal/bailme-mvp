@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Bail Me — Generate</title>
+  <link rel="manifest" href="../manifest.webmanifest">
+  <meta name="theme-color" content="#0f172a" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../assets/css/styles.css" />
+</head>
+<body class="bg-slate-50 text-slate-900">
+  <header class="site-header"></header>
+
+  <main class="max-w-3xl mx-auto px-4 py-6">
+    <h1 class="page-title">Generate</h1>
+    <section class="grid grid-cols-1 md:grid-cols-4 gap-3">
+      <div><label class="lbl">Category</label><select id="category" class="ctrl"><option>Work</option><option>Social</option><option>Family</option><option>Health</option></select></div>
+      <div><label class="lbl">Intent</label><select id="intent" class="ctrl"><option>Cancel</option><option>Delay</option><option>Reschedule</option></select></div>
+      <div><label class="lbl">Tone</label><select id="tone" class="ctrl"><option value="formal">Formal</option><option value="casual">Casual</option></select></div>
+      <div class="flex items-end"><button id="btn-generate" class="btn-primary w-full">Generate</button></div>
+    </section>
+    <section id="results" class="mt-6 grid gap-3"></section>
+  </main>
+
+  <footer class="site-footer"></footer>
+  <template id="card-template">
+    <article class="card">
+      <div class="flex items-start gap-3">
+        <div class="flex-1">
+          <p class="card-text"></p>
+          <div class="tags">
+            <span class="tag category"></span>
+            <span class="tag intent"></span>
+            <span class="tag tone"></span>
+          </div>
+        </div>
+        <div class="card-actions">
+          <button class="btn-copy">Copy</button>
+          <button class="btn-share">Share</button>
+          <button class="btn-fav">☆ Save</button>
+        </div>
+      </div>
+    </article>
+  </template>
+
+  <script>window.__PAGE__ = 'generate';</script>
+  <script type="module" src="../assets/js/excuses.js"></script>
+  <script type="module" src="../assets/js/ui.js"></script>
+  <script type="module" src="../assets/js/storage.js"></script>
+  <script type="module" src="../assets/js/page.js"></script>
+</body>
+</html>

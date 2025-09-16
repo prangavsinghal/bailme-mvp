@@ -1,0 +1,6 @@
+id,category,intent,tone,text
+1,Work,Cancel,formal,"I need to cancel — we've had an urgent blocker on a live issue and I'm being pulled into a fix."
+2,Work,Cancel,casual,"Gotta drop — prod just hiccuped and I'm on deck to help. Rain check?"
+3,Work,Cancel,formal,"Apologies, a critical dependency slipped and I have to stay on the war-room call. Can we skip today?"
+4,Work,Delay,formal,"Running 20–25 mins late — a standup overran due to escalations. Appreciate your patience."
+5,Work,Delay,casual,"Stuck in a spillover standup. Will join in ~15. Sorry!"

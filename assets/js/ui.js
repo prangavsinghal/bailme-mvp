@@ -22,6 +22,7 @@ export function injectFooter() {
     <span class="muted text-xs">Open-source • No backend • PWA offline-ready</span>
   </div>`;
 }
+import { track } from './analytics.js';
 export function renderCard(tplId, excuse, { onCopy, onShare, onFav, isFav }) {
   const tpl = document.getElementById(tplId);
   const node = tpl.content.firstElementChild.cloneNode(true);
@@ -32,7 +33,7 @@ export function renderCard(tplId, excuse, { onCopy, onShare, onFav, isFav }) {
   const copyBtn = node.querySelector(".btn-copy");
   copyBtn.addEventListener("click", async () => {
     try { await navigator.clipboard.writeText(excuse.text); copyBtn.textContent="Copied"; setTimeout(()=>copyBtn.textContent="Copy",1200); } catch {}
-    onCopy && onCopy(excuse);
+    track('Copy', { category: excuse.category, intent: excuse.intent, tone: excuse.tone }); onCopy && onCopy(excuse);
   });
   const shareBtn = node.querySelector(".btn-share");
   if (!navigator.share) shareBtn.classList.add("hidden"); else shareBtn.addEventListener("click",()=>{ navigator.share({text:excuse.text,title:"Bail Me excuse"}).catch(()=>{}); onShare&&onShare(excuse); });
@@ -42,7 +43,7 @@ export function renderCard(tplId, excuse, { onCopy, onShare, onFav, isFav }) {
     else { favBtn.textContent = "☆ Save"; favBtn.classList.add("bg-amber-50"); favBtn.classList.remove("bg-amber-200"); }
   };
   setFavState(isFav && isFav(excuse.id));
-  favBtn.addEventListener("click", () => onFav && onFav(excuse, setFavState));
+  favBtn.addEventListener("click", () => { track('FavoriteToggle', { id: excuse.id, category: excuse.category, intent: excuse.intent, tone: excuse.tone }); onFav && onFav(excuse, setFavState); });
   return node;
 }
 export function pickRandom(arr, n=3){

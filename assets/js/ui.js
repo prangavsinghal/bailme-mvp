@@ -1,3 +1,4 @@
+import { listFavs } from './storage.js';
 export function rootPrefix(){
   const path = location.pathname;
   return path.endsWith("/index.html") || path.match(/\/$/) ? "./" : "../";
@@ -5,12 +6,14 @@ export function rootPrefix(){
 export function injectHeader(active) {
   const el = document.querySelector(".site-header");
   if (!el) return;
+  const favCount = listFavs().size;
+  const badge = favCount > 0 ? `<span class="nav-badge">${favCount}</span>` : '';
   el.innerHTML = `
     <div class="navbar">
       <a class="brand" href="${rootPrefix()}index.html">Bail Me</a>
       <nav class="navlinks">
         <a href="${rootPrefix()}pages/generate.html" class="${active==='generate'?'active':''}">Generate</a>
-        <a href="${rootPrefix()}pages/favorites.html" class="${active==='favorites'?'active':''}">Favorites</a>
+        <a href="${rootPrefix()}pages/favorites.html" class="${active==='favorites'?'active':''}">Favorites${badge}</a>
         <a href="${rootPrefix()}pages/library.html" class="${active==='library'?'active':''}">Library</a>
       </nav>
     </div>`;

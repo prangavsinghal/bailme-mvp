@@ -1,4 +1,4 @@
-const CACHE = "bailme-multipage-v1";
+const CACHE = "bailme-multipage-v2";
 const CORE = [
   "./",
   "./index.html",

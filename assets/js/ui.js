@@ -33,17 +33,21 @@ export function renderCard(tplId, excuse, { onCopy, onShare, onFav, isFav }) {
   const copyBtn = node.querySelector(".btn-copy");
   copyBtn.addEventListener("click", async () => {
     try { await navigator.clipboard.writeText(excuse.text); copyBtn.textContent="Copied"; setTimeout(()=>copyBtn.textContent="Copy",1200); } catch {}
-    track('Copy', { category: excuse.category, intent: excuse.intent, tone: excuse.tone }); onCopy && onCopy(excuse);
+    track('excuse_copied', { category: excuse.category, intent: excuse.intent, tone: excuse.tone }); onCopy && onCopy(excuse);
   });
   const shareBtn = node.querySelector(".btn-share");
-  if (!navigator.share) shareBtn.classList.add("hidden"); else shareBtn.addEventListener("click",()=>{ navigator.share({text:excuse.text,title:"Bail Me excuse"}).catch(()=>{}); onShare&&onShare(excuse); });
+  if (!navigator.share) shareBtn.classList.add("hidden"); else shareBtn.addEventListener("click",()=>{ navigator.share({text:excuse.text,title:"Bail Me excuse"}).catch(()=>{}); track('excuse_shared', { category: excuse.category, intent: excuse.intent, tone: excuse.tone }); onShare&&onShare(excuse); });
   const favBtn = node.querySelector(".btn-fav");
   const setFavState = (fav) => {
     if (fav) { favBtn.textContent = "★ Saved"; favBtn.classList.add("bg-amber-200"); favBtn.classList.remove("bg-amber-50"); }
     else { favBtn.textContent = "☆ Save"; favBtn.classList.add("bg-amber-50"); favBtn.classList.remove("bg-amber-200"); }
   };
   setFavState(isFav && isFav(excuse.id));
-  favBtn.addEventListener("click", () => { track('FavoriteToggle', { id: excuse.id, category: excuse.category, intent: excuse.intent, tone: excuse.tone }); onFav && onFav(excuse, setFavState); });
+  favBtn.addEventListener("click", () => {
+    const saving = !(isFav && isFav(excuse.id));
+    track(saving ? 'excuse_saved' : 'excuse_removed', { id: excuse.id, category: excuse.category, intent: excuse.intent, tone: excuse.tone });
+    onFav && onFav(excuse, setFavState);
+  });
   return node;
 }
 export function pickRandom(arr, n=3){

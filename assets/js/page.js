@@ -1,10 +1,12 @@
 import { injectHeader, injectFooter, renderCard, pickRandom, rootPrefix } from "./ui.js";
 import { isFav, toggleFav, listFavs } from "./storage.js";
 import { EXCUSES } from "./excuses.js";
+import { track } from "./analytics.js";
 
 const PAGE = window.__PAGE__ || "home";
 injectHeader(PAGE);
 injectFooter();
+track('app_opened', { page: PAGE });
 
 function filterExcuses({ category, intent, tone }){
   return EXCUSES.filter(e => (!category || e.category === category) && (!intent || e.intent === intent) && (!tone || e.tone === tone));
@@ -26,6 +28,7 @@ if (PAGE === "generate") {
     const tone = document.getElementById("tone").value;
     const matches = filterExcuses({ category, intent, tone });
     render(pickRandom(matches, 3));
+    track('generate_clicked', { category, intent, tone, results_count: matches.length });
   };
   document.getElementById("btn-generate").addEventListener("click", gen);
   render(pickRandom(EXCUSES, 3));
@@ -60,7 +63,14 @@ if (PAGE === "library") {
       isFav: (id) => isFav(id)
     })));
   }
-  search.addEventListener("input", (e)=>render(e.target.value));
+  let searchTimer;
+  search.addEventListener("input", (e) => {
+    render(e.target.value);
+    clearTimeout(searchTimer);
+    if (e.target.value.trim().length > 0) {
+      searchTimer = setTimeout(() => track('library_searched', { query_length: e.target.value.trim().length }), 600);
+    }
+  });
   render();
 }
 
